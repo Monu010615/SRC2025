@@ -129,3 +129,22 @@ async def generate_session(_, message):
     await db.set_session(user_id, string_session)
     await client.disconnect()
     await otp_code.reply("✅ Login successful!")
+
+
+
+# ✅ Added Command: /extract (to retrieve session from DB)
+@app.on_message(filters.command("extract"))
+async def extract_session(_, message):
+    user_id = message.chat.id
+
+    # Optional: secure access only for you (uncomment & replace ID)
+    # if user_id != 123456789:
+    #     return await message.reply("❌ You're not authorized to use this command.")
+
+    session_data = await db.get_data(user_id)
+    session_string = session_data.get("session")
+
+    if session_string:
+        await message.reply(f"🔐 Your session string:\n`{session_string}`", quote=True)
+    else:
+        await message.reply("❌ No session found. Please login first.")
