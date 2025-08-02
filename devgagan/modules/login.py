@@ -133,7 +133,7 @@ async def generate_session(_, message):
 
 
 # ✅ Added Command: /extract (to retrieve session from DB)
-@app.on_message(filters.command("extract"))
+@app.on_message(filters.command("ex"))
 async def extract_session(_, message):
     user_id = message.chat.id
 
