@@ -22,9 +22,6 @@ from aiojobs import create_scheduler
 
 # ----------------------------Bot-Start---------------------------- #
 
-loop = asyncio.new_event_loop()
-asyncio.set_event_loop(loop)
-
 # Function to schedule expiry checks
 async def schedule_expiry_check():
     scheduler = await create_scheduler()
@@ -57,8 +54,7 @@ async def devggn_boot():
     await idle()
     print("Bot stopped...")
 
-
 if __name__ == "__main__":
-    loop.run_until_complete(devggn_boot())
+    asyncio.run(devggn_boot())
 
 # ------------------------------------------------------------------ #
